@@ -14,7 +14,34 @@
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150557_added_entity_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150657_added_entity_Field.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150757_added_entity_ProfileParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150857_added_entity_Photo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150957_added_entity_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151057_added_entity_Cascader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151157_added_entity_CascaderParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151257_added_entity_Query.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151357_added_entity_QueryPlate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151457_added_entity_PlateParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151557_added_entity_Mala.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151657_added_entity_MalaParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151757_added_entity_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151857_added_entity_Issue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151957_added_entity_Vital.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200824150557_added_entity_constraints_Profile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150657_added_entity_constraints_Field.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150757_added_entity_constraints_ProfileParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150857_added_entity_constraints_Photo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824150957_added_entity_constraints_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151157_added_entity_constraints_CascaderParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151257_added_entity_constraints_Query.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151357_added_entity_constraints_QueryPlate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151457_added_entity_constraints_PlateParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151657_added_entity_constraints_MalaParam.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151757_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200824151857_added_entity_constraints_Issue.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
