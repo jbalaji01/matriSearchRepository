@@ -34,6 +34,7 @@ export const Mala = (props: IMalaProps) => {
               <tr>
                 <th>ID</th>
                 <th>Mala Name</th>
+                <th>Is Editable</th>
                 <th>Description</th>
                 <th />
               </tr>
@@ -47,6 +48,7 @@ export const Mala = (props: IMalaProps) => {
                     </Button>
                   </td>
                   <td>{mala.malaName}</td>
+                  <td>{mala.isEditable ? 'true' : 'false'}</td>
                   <td>{mala.description}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

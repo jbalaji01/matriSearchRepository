@@ -40,4 +40,20 @@ public interface CascaderParamService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     *  get the record that has max peckOrder
+     *  set of records under given parentId are considered
+     * @param long1 
+     */
+    Optional<CascaderParamDTO> findMaxPeckOrderUnderParentId(Long cascaderId, Long parentId);
+    
+    /**
+     * find unique paramTitle under given cascaderId and parentId
+     * @param cascaderId
+     * @param parentId
+     * @param paramTitle
+     * @return
+     */
+    Optional<CascaderParamDTO> findUniqueParamTitle(Long cascaderId, Long parentId, String paramTitle);
 }

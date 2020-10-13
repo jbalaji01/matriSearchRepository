@@ -9,7 +9,7 @@ import { NavLink as Link } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu } from '../menus';
+import { AdminMenu, EntitiesMenu, AccountMenu, TechnoMenu } from '../menus';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -44,6 +44,7 @@ const Header = (props: IHeaderProps) => {
           <Nav id="header-tabs" className="ml-auto" navbar>
             <Home />
             {props.isAuthenticated && <EntitiesMenu />}
+            {props.isAuthenticated && <TechnoMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showSwagger={props.isSwaggerEnabled} />}
             <AccountMenu isAuthenticated={props.isAuthenticated} />
           </Nav>

@@ -13,6 +13,8 @@ public class MalaDTO implements Serializable {
 
     private String malaName;
 
+    private Boolean isEditable;
+
     private String description;
 
     
@@ -30,6 +32,14 @@ public class MalaDTO implements Serializable {
 
     public void setMalaName(String malaName) {
         this.malaName = malaName;
+    }
+
+    public Boolean isIsEditable() {
+        return isEditable;
+    }
+
+    public void setIsEditable(Boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     public String getDescription() {
@@ -63,6 +73,7 @@ public class MalaDTO implements Serializable {
         return "MalaDTO{" +
             "id=" + getId() +
             ", malaName='" + getMalaName() + "'" +
+            ", isEditable='" + isIsEditable() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

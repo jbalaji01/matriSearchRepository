@@ -35,6 +35,7 @@ export const Issue = (props: IIssueProps) => {
                 <th>ID</th>
                 <th>Created Time</th>
                 <th>Updated Time</th>
+                <th>Description</th>
                 <th>Complaint</th>
                 <th>Admin</th>
                 <th />
@@ -50,6 +51,7 @@ export const Issue = (props: IIssueProps) => {
                   </td>
                   <td>{issue.createdTime ? <TextFormat type="date" value={issue.createdTime} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{issue.updatedTime ? <TextFormat type="date" value={issue.updatedTime} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{issue.description}</td>
                   <td>{issue.complaintId ? <Link to={`profile/${issue.complaintId}`}>{issue.complaintId}</Link> : ''}</td>
                   <td>{issue.adminId ? <Link to={`profile/${issue.adminId}`}>{issue.adminId}</Link> : ''}</td>
                   <td className="text-right">

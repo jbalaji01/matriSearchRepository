@@ -6,6 +6,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "isEditable",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "description",
       "fieldType": "String"
     }

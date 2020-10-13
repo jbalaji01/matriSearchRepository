@@ -1,5 +1,6 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.Cascader;
 import com.neemshade.matri.service.dto.CascaderDTO;
 
 import java.util.List;
@@ -40,4 +41,6 @@ public interface CascaderService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    Optional<CascaderDTO> findOneByCascaderName(String cascaderName);
 }

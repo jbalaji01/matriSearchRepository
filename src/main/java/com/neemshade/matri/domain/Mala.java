@@ -23,6 +23,9 @@ public class Mala implements Serializable {
     @Column(name = "mala_name")
     private String malaName;
 
+    @Column(name = "is_editable")
+    private Boolean isEditable;
+
     @Column(name = "description")
     private String description;
 
@@ -49,6 +52,19 @@ public class Mala implements Serializable {
 
     public void setMalaName(String malaName) {
         this.malaName = malaName;
+    }
+
+    public Boolean isIsEditable() {
+        return isEditable;
+    }
+
+    public Mala isEditable(Boolean isEditable) {
+        this.isEditable = isEditable;
+        return this;
+    }
+
+    public void setIsEditable(Boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     public String getDescription() {
@@ -112,6 +128,7 @@ public class Mala implements Serializable {
         return "Mala{" +
             "id=" + getId() +
             ", malaName='" + getMalaName() + "'" +
+            ", isEditable='" + isIsEditable() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

@@ -15,6 +15,9 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 
+import Techno from 'app/matriPages/techno';
+import ParamCreator from './matriPages/techno/param-creator';
+
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
   loading: () => <div>loading ...</div>,
@@ -34,10 +37,20 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/account/activate/:key?" component={Activate} />
       <ErrorBoundaryRoute path="/account/reset/request" component={PasswordResetInit} />
       <ErrorBoundaryRoute path="/account/reset/finish/:key?" component={PasswordResetFinish} />
+
+      <PrivateRoute path="/techno" component={Techno} hasAnyAuthorities={[AUTHORITIES.TECHNO]} />
+      <PrivateRoute path="/param-creator" component={ParamCreator} hasAnyAuthorities={[AUTHORITIES.TECHNO]} />
+
       <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
+
+
+      
+
       <ErrorBoundaryRoute path="/" exact component={Home} />
       <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.USER]} />
+
+
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>
   </div>

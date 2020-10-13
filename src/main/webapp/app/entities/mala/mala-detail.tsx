@@ -30,6 +30,10 @@ export const MalaDetail = (props: IMalaDetailProps) => {
           </dt>
           <dd>{malaEntity.malaName}</dd>
           <dt>
+            <span id="isEditable">Is Editable</span>
+          </dt>
+          <dd>{malaEntity.isEditable ? 'true' : 'false'}</dd>
+          <dt>
             <span id="description">Description</span>
           </dt>
           <dd>{malaEntity.description}</dd>
