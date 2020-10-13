@@ -65,4 +65,11 @@ public class CascaderServiceImpl implements CascaderService {
         log.debug("Request to delete Cascader : {}", id);
         cascaderRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<CascaderDTO> findOneByCascaderName(String cascaderName) {
+		log.debug("Request to get Cascader by name : {}", cascaderName);
+        return cascaderRepository.findOneByCascaderName(cascaderName)
+            .map(cascaderMapper::toDto);
+	}
 }

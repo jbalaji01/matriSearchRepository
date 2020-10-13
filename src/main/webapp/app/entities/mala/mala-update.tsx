@@ -77,6 +77,12 @@ export const MalaUpdate = (props: IMalaUpdateProps) => {
                 </Label>
                 <AvField id="mala-malaName" type="text" name="malaName" />
               </AvGroup>
+              <AvGroup check>
+                <Label id="isEditableLabel">
+                  <AvInput id="mala-isEditable" type="checkbox" className="form-check-input" name="isEditable" />
+                  Is Editable
+                </Label>
+              </AvGroup>
               <AvGroup>
                 <Label id="descriptionLabel" for="mala-description">
                   Description

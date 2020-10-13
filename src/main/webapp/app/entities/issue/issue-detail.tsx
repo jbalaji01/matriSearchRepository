@@ -33,6 +33,10 @@ export const IssueDetail = (props: IIssueDetailProps) => {
             <span id="updatedTime">Updated Time</span>
           </dt>
           <dd>{issueEntity.updatedTime ? <TextFormat value={issueEntity.updatedTime} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="description">Description</span>
+          </dt>
+          <dd>{issueEntity.description}</dd>
           <dt>Complaint</dt>
           <dd>{issueEntity.complaintId ? issueEntity.complaintId : ''}</dd>
           <dt>Admin</dt>

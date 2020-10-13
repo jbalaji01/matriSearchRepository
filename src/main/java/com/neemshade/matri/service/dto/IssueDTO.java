@@ -16,6 +16,8 @@ public class IssueDTO implements Serializable {
 
     private Instant updatedTime;
 
+    private String description;
+
 
     private Long complaintId;
 
@@ -43,6 +45,14 @@ public class IssueDTO implements Serializable {
 
     public void setUpdatedTime(Instant updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getComplaintId() {
@@ -85,6 +95,7 @@ public class IssueDTO implements Serializable {
             "id=" + getId() +
             ", createdTime='" + getCreatedTime() + "'" +
             ", updatedTime='" + getUpdatedTime() + "'" +
+            ", description='" + getDescription() + "'" +
             ", complaintId=" + getComplaintId() +
             ", adminId=" + getAdminId() +
             "}";

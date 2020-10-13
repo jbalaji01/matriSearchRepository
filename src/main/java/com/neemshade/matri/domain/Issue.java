@@ -26,6 +26,9 @@ public class Issue implements Serializable {
     @Column(name = "updated_time")
     private Instant updatedTime;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "issueds", allowSetters = true)
     private Profile complaint;
@@ -67,6 +70,19 @@ public class Issue implements Serializable {
 
     public void setUpdatedTime(Instant updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Issue description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Profile getComplaint() {
@@ -119,6 +135,7 @@ public class Issue implements Serializable {
             "id=" + getId() +
             ", createdTime='" + getCreatedTime() + "'" +
             ", updatedTime='" + getUpdatedTime() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

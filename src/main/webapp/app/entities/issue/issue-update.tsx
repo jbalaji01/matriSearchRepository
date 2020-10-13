@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
+import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
@@ -105,6 +105,12 @@ export const IssueUpdate = (props: IIssueUpdateProps) => {
                   placeholder={'YYYY-MM-DD HH:mm'}
                   value={isNew ? displayDefaultDateTime() : convertDateTimeFromServer(props.issueEntity.updatedTime)}
                 />
+              </AvGroup>
+              <AvGroup>
+                <Label id="descriptionLabel" for="issue-description">
+                  Description
+                </Label>
+                <AvField id="issue-description" type="text" name="description" />
               </AvGroup>
               <AvGroup>
                 <Label for="issue-complaint">Complaint</Label>

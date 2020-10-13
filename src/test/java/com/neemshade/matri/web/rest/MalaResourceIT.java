@@ -35,6 +35,9 @@ public class MalaResourceIT {
     private static final String DEFAULT_MALA_NAME = "AAAAAAAAAA";
     private static final String UPDATED_MALA_NAME = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_IS_EDITABLE = false;
+    private static final Boolean UPDATED_IS_EDITABLE = true;
+
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
@@ -64,6 +67,7 @@ public class MalaResourceIT {
     public static Mala createEntity(EntityManager em) {
         Mala mala = new Mala()
             .malaName(DEFAULT_MALA_NAME)
+            .isEditable(DEFAULT_IS_EDITABLE)
             .description(DEFAULT_DESCRIPTION);
         return mala;
     }
@@ -76,6 +80,7 @@ public class MalaResourceIT {
     public static Mala createUpdatedEntity(EntityManager em) {
         Mala mala = new Mala()
             .malaName(UPDATED_MALA_NAME)
+            .isEditable(UPDATED_IS_EDITABLE)
             .description(UPDATED_DESCRIPTION);
         return mala;
     }
@@ -101,6 +106,7 @@ public class MalaResourceIT {
         assertThat(malaList).hasSize(databaseSizeBeforeCreate + 1);
         Mala testMala = malaList.get(malaList.size() - 1);
         assertThat(testMala.getMalaName()).isEqualTo(DEFAULT_MALA_NAME);
+        assertThat(testMala.isIsEditable()).isEqualTo(DEFAULT_IS_EDITABLE);
         assertThat(testMala.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
@@ -137,6 +143,7 @@ public class MalaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(mala.getId().intValue())))
             .andExpect(jsonPath("$.[*].malaName").value(hasItem(DEFAULT_MALA_NAME)))
+            .andExpect(jsonPath("$.[*].isEditable").value(hasItem(DEFAULT_IS_EDITABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
     
@@ -152,6 +159,7 @@ public class MalaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(mala.getId().intValue()))
             .andExpect(jsonPath("$.malaName").value(DEFAULT_MALA_NAME))
+            .andExpect(jsonPath("$.isEditable").value(DEFAULT_IS_EDITABLE.booleanValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
     @Test
@@ -176,6 +184,7 @@ public class MalaResourceIT {
         em.detach(updatedMala);
         updatedMala
             .malaName(UPDATED_MALA_NAME)
+            .isEditable(UPDATED_IS_EDITABLE)
             .description(UPDATED_DESCRIPTION);
         MalaDTO malaDTO = malaMapper.toDto(updatedMala);
 
@@ -189,6 +198,7 @@ public class MalaResourceIT {
         assertThat(malaList).hasSize(databaseSizeBeforeUpdate);
         Mala testMala = malaList.get(malaList.size() - 1);
         assertThat(testMala.getMalaName()).isEqualTo(UPDATED_MALA_NAME);
+        assertThat(testMala.isIsEditable()).isEqualTo(UPDATED_IS_EDITABLE);
         assertThat(testMala.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 

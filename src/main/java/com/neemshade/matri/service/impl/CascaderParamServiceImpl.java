@@ -65,4 +65,18 @@ public class CascaderParamServiceImpl implements CascaderParamService {
         log.debug("Request to delete CascaderParam : {}", id);
         cascaderParamRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<CascaderParamDTO> findMaxPeckOrderUnderParentId(Long cascaderId, Long parentId) {
+		log.debug("CascaderParam record of max peckOrder under parent : {}", parentId);
+		return cascaderParamRepository.findTopByCascaderIdAndParentIdOrderByPeckOrderDesc(cascaderId, parentId)
+	            .map(cascaderParamMapper::toDto);
+	}
+
+	@Override
+	public Optional<CascaderParamDTO> findUniqueParamTitle(Long cascaderId, Long parentId, String paramTitle) {
+		log.debug("unique CascaderParam of cascader {},  parent : {}, title : {}", cascaderId, parentId, paramTitle);
+		return cascaderParamRepository.findTopByCascaderIdAndParentIdAndParamTitleIgnoreCase(cascaderId, parentId, paramTitle)
+	            .map(cascaderParamMapper::toDto);
+	}
 }

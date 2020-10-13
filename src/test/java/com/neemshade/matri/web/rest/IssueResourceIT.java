@@ -40,6 +40,9 @@ public class IssueResourceIT {
     private static final Instant DEFAULT_UPDATED_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     @Autowired
     private IssueRepository issueRepository;
 
@@ -66,7 +69,8 @@ public class IssueResourceIT {
     public static Issue createEntity(EntityManager em) {
         Issue issue = new Issue()
             .createdTime(DEFAULT_CREATED_TIME)
-            .updatedTime(DEFAULT_UPDATED_TIME);
+            .updatedTime(DEFAULT_UPDATED_TIME)
+            .description(DEFAULT_DESCRIPTION);
         return issue;
     }
     /**
@@ -78,7 +82,8 @@ public class IssueResourceIT {
     public static Issue createUpdatedEntity(EntityManager em) {
         Issue issue = new Issue()
             .createdTime(UPDATED_CREATED_TIME)
-            .updatedTime(UPDATED_UPDATED_TIME);
+            .updatedTime(UPDATED_UPDATED_TIME)
+            .description(UPDATED_DESCRIPTION);
         return issue;
     }
 
@@ -104,6 +109,7 @@ public class IssueResourceIT {
         Issue testIssue = issueList.get(issueList.size() - 1);
         assertThat(testIssue.getCreatedTime()).isEqualTo(DEFAULT_CREATED_TIME);
         assertThat(testIssue.getUpdatedTime()).isEqualTo(DEFAULT_UPDATED_TIME);
+        assertThat(testIssue.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -139,7 +145,8 @@ public class IssueResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(issue.getId().intValue())))
             .andExpect(jsonPath("$.[*].createdTime").value(hasItem(DEFAULT_CREATED_TIME.toString())))
-            .andExpect(jsonPath("$.[*].updatedTime").value(hasItem(DEFAULT_UPDATED_TIME.toString())));
+            .andExpect(jsonPath("$.[*].updatedTime").value(hasItem(DEFAULT_UPDATED_TIME.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
     
     @Test
@@ -154,7 +161,8 @@ public class IssueResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(issue.getId().intValue()))
             .andExpect(jsonPath("$.createdTime").value(DEFAULT_CREATED_TIME.toString()))
-            .andExpect(jsonPath("$.updatedTime").value(DEFAULT_UPDATED_TIME.toString()));
+            .andExpect(jsonPath("$.updatedTime").value(DEFAULT_UPDATED_TIME.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
     @Test
     @Transactional
@@ -178,7 +186,8 @@ public class IssueResourceIT {
         em.detach(updatedIssue);
         updatedIssue
             .createdTime(UPDATED_CREATED_TIME)
-            .updatedTime(UPDATED_UPDATED_TIME);
+            .updatedTime(UPDATED_UPDATED_TIME)
+            .description(UPDATED_DESCRIPTION);
         IssueDTO issueDTO = issueMapper.toDto(updatedIssue);
 
         restIssueMockMvc.perform(put("/api/issues")
@@ -192,6 +201,7 @@ public class IssueResourceIT {
         Issue testIssue = issueList.get(issueList.size() - 1);
         assertThat(testIssue.getCreatedTime()).isEqualTo(UPDATED_CREATED_TIME);
         assertThat(testIssue.getUpdatedTime()).isEqualTo(UPDATED_UPDATED_TIME);
+        assertThat(testIssue.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

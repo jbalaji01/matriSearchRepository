@@ -8,6 +8,10 @@
     {
       "fieldName": "updatedTime",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
     }
   ],
   "relationships": [

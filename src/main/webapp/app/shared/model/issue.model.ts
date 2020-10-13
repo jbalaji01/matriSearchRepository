@@ -4,6 +4,7 @@ export interface IIssue {
   id?: number;
   createdTime?: string;
   updatedTime?: string;
+  description?: string;
   complaintId?: number;
   adminId?: number;
 }
