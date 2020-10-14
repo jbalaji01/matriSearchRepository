@@ -71,6 +71,10 @@ import issue, {
 import vital, {
   VitalState
 } from 'app/entities/vital/vital.reducer';
+// prettier-ignore
+import fieldAttribute, {
+  FieldAttributeState
+} from 'app/entities/field-attribute/field-attribute.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -98,6 +102,7 @@ export interface IRootState {
   readonly payment: PaymentState;
   readonly issue: IssueState;
   readonly vital: VitalState;
+  readonly fieldAttribute: FieldAttributeState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -127,6 +132,7 @@ const rootReducer = combineReducers<IRootState>({
   payment,
   issue,
   vital,
+  fieldAttribute,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });
