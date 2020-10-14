@@ -19,6 +19,7 @@ import MalaParam from './mala-param';
 import Payment from './payment';
 import Issue from './issue';
 import Vital from './vital';
+import FieldAttribute from './field-attribute';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -40,6 +41,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}payment`} component={Payment} />
       <ErrorBoundaryRoute path={`${match.url}issue`} component={Issue} />
       <ErrorBoundaryRoute path={`${match.url}vital`} component={Vital} />
+      <ErrorBoundaryRoute path={`${match.url}field-attribute`} component={FieldAttribute} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

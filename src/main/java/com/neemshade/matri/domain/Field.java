@@ -28,6 +28,9 @@ public class Field implements Serializable {
     private Integer peckOrder;
 
     @OneToMany(mappedBy = "field")
+    private Set<FieldAttribute> fieldAttributes = new HashSet<>();
+
+    @OneToMany(mappedBy = "field")
     private Set<ProfileParam> profileParams = new HashSet<>();
 
     @OneToMany(mappedBy = "field")
@@ -81,6 +84,31 @@ public class Field implements Serializable {
 
     public void setPeckOrder(Integer peckOrder) {
         this.peckOrder = peckOrder;
+    }
+
+    public Set<FieldAttribute> getFieldAttributes() {
+        return fieldAttributes;
+    }
+
+    public Field fieldAttributes(Set<FieldAttribute> fieldAttributes) {
+        this.fieldAttributes = fieldAttributes;
+        return this;
+    }
+
+    public Field addFieldAttribute(FieldAttribute fieldAttribute) {
+        this.fieldAttributes.add(fieldAttribute);
+        fieldAttribute.setField(this);
+        return this;
+    }
+
+    public Field removeFieldAttribute(FieldAttribute fieldAttribute) {
+        this.fieldAttributes.remove(fieldAttribute);
+        fieldAttribute.setField(null);
+        return this;
+    }
+
+    public void setFieldAttributes(Set<FieldAttribute> fieldAttributes) {
+        this.fieldAttributes = fieldAttributes;
     }
 
     public Set<ProfileParam> getProfileParams() {

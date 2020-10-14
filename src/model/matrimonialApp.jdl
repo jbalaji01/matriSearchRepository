@@ -38,6 +38,12 @@ entity Field {
 	peckOrder Integer
 }
 
+
+entity FieldAttribute {
+	attributeName String
+	attributeValue String
+}
+
 /**
  * a field can take any of the type like String, integer or cascader
  */
@@ -47,6 +53,8 @@ relationship OneToMany {
 	 
     CascaderParam{dataSourcer(fieldName)} to Field{dataSource(paramTitle)}
 	CascaderParam{dataTyper(fieldName)} to Field{dataType(paramTitle)}
+	
+	Field{fieldAttribute(attributeName)} to FieldAttribute{field(fieldName)}
 }
 
 /**

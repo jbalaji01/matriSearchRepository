@@ -20,6 +20,8 @@ public interface FieldMapper extends EntityMapper<FieldDTO, Field> {
     @Mapping(source = "cascader.cascaderName", target = "cascaderCascaderName")
     FieldDTO toDto(Field field);
 
+    @Mapping(target = "fieldAttributes", ignore = true)
+    @Mapping(target = "removeFieldAttribute", ignore = true)
     @Mapping(target = "profileParams", ignore = true)
     @Mapping(target = "removeProfileParam", ignore = true)
     @Mapping(target = "queryPlates", ignore = true)
