@@ -49,6 +49,7 @@ public class CascadeParamEngine extends ParamEngine {
 	private CascaderParam parent = null;
 	
 	private Cascader cascader = null;
+	private boolean isNewCascader = false;
 	
 	private int paramLevel = 1;
 	private boolean shouldPeckOrderFetched = true;
@@ -91,7 +92,7 @@ public class CascadeParamEngine extends ParamEngine {
 	@Override
 	public void parseLine(String line) {
 		
-		
+		// isNewCascader = false;
 		
 		// check if the line has cascadeName
 		// portion before hypen is used to create cascader object
@@ -100,7 +101,7 @@ public class CascadeParamEngine extends ParamEngine {
 		if(hyphenPos >= 0) {
 			String namePortion = line.substring(0, hyphenPos);
 			cascader = composeCascader(namePortion);
-			log.debug("cascade name {} {}", cascader.getCascaderName(), cascader.isCanEnterCustomValue());
+			log.debug("cascade name [{}] [{}]", cascader.getCascaderName(), cascader.isCanEnterCustomValue());
 			
 			if(hyphenPos + 1 < line.length()) {
 				line = line.substring(hyphenPos + 1);
@@ -108,6 +109,20 @@ public class CascadeParamEngine extends ParamEngine {
 				line = null;
 			}
 			
+
+			// if it is first time to create the cascader, check if it is height.
+			// if so, fill cascaderParam
+			if(isNewCascader && cascader.getCascaderName().equals("height")) {
+				
+				line = "";
+				// these are number of inches from 2.5 to 8.3 feets
+				for(int i=30; i < 101; i++) {
+					line += ("/" + i);
+				}
+				
+				isNewCascader = false;
+				// log.debug("inside height forming - {}", line);
+			}
 		}
 		
 
@@ -115,6 +130,8 @@ public class CascadeParamEngine extends ParamEngine {
 			return;
 		
 		line = line.trim();
+		
+		
 		
 		if("".equals(line))
 			return;
@@ -247,11 +264,14 @@ public class CascadeParamEngine extends ParamEngine {
 	private Cascader composeCascader(String namePortion) {
 		String CUSTOM = "canEnterCustomValue";
 		
+		namePortion = namePortion.trim();
 		int flagPos = namePortion.indexOf(CUSTOM);
 		
 		String name = namePortion;
 		if(flagPos >= 0) {
-			name = namePortion.substring(0, flagPos) + namePortion.substring(flagPos + CUSTOM.length() + 1);
+//			log.debug("flagPos = {}, CUSTOM = {}, namePortion = {}", flagPos, CUSTOM.length(), namePortion.length());
+//			name = namePortion.substring(0, flagPos) + namePortion.substring(flagPos + CUSTOM.length() + 1);
+			name = namePortion.replace(CUSTOM, "");
 			name = name.trim();
 		}
 		
@@ -276,8 +296,11 @@ public class CascadeParamEngine extends ParamEngine {
 		try {
 			if(optionalCascaderDTO.isPresent()) {
 				obtainedCascaderDTO = optionalCascaderDTO.get();
+				isNewCascader = false;
 			} else {
 				obtainedCascaderDTO = cascaderService.save(givenCascaderDTO);
+				log.debug("new cascader=[{}] ", obtainedCascaderDTO.getCascaderName());
+				isNewCascader = true;
 				successCount++;
 			}
 		} catch (Exception e) {

@@ -40,4 +40,11 @@ public interface MalaService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     * find unique mala with the given mala name
+     * @param malaName
+     * @return
+     */
+    Optional<MalaDTO> findUniqueMala(String malaName);
 }

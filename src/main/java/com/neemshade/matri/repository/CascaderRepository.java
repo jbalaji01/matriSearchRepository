@@ -2,6 +2,7 @@ package com.neemshade.matri.repository;
 
 import com.neemshade.matri.domain.Cascader;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.*;
@@ -14,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CascaderRepository extends JpaRepository<Cascader, Long> {
 	
-	Optional<Cascader> findOneByCascaderName(String cascaderName);
+	Optional<Cascader> findTopByCascaderName(String cascaderName);
 	
 }

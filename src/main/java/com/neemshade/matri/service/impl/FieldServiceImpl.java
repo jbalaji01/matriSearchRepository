@@ -65,4 +65,18 @@ public class FieldServiceImpl implements FieldService {
         log.debug("Request to delete Field : {}", id);
         fieldRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<FieldDTO> findMaxPeckOrder() {
+		log.debug("Request to get Field with max peckOrder");
+        return fieldRepository.findTopByOrderByPeckOrderDesc()
+            .map(fieldMapper::toDto);
+	}
+
+	@Override
+	public Optional<FieldDTO> findUniqueFieldUnderMala(String malaName, String fieldName) {
+		log.debug("Request to get unique Field : {}", fieldName);
+        return fieldRepository.findTopByMalaParamsMalaMalaNameAndFieldName(malaName, fieldName)
+            .map(fieldMapper::toDto);
+	}
 }

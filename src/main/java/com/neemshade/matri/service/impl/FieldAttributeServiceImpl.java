@@ -65,4 +65,17 @@ public class FieldAttributeServiceImpl implements FieldAttributeService {
         log.debug("Request to delete FieldAttribute : {}", id);
         fieldAttributeRepository.deleteById(id);
     }
+
+	@Override
+	public void deleteUnderField(Long fieldId) {
+		log.debug("Request to delete FieldAttributes under field : {}", fieldId);
+        fieldAttributeRepository.deleteByFieldId(fieldId);
+	}
+
+	@Override
+	public Optional<FieldAttributeDTO> findUniqueFieldAttribute(Long fieldId, String attributeName) {
+		log.debug("Request to get unique FieldAttribute : field {}, attributeName {}", fieldId, attributeName);
+        return fieldAttributeRepository.findTopByFieldIdAndAttributeName(fieldId, attributeName)
+            .map(fieldAttributeMapper::toDto);
+	}
 }

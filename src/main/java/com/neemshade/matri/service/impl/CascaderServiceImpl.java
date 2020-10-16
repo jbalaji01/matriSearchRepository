@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -69,7 +71,21 @@ public class CascaderServiceImpl implements CascaderService {
 	@Override
 	public Optional<CascaderDTO> findOneByCascaderName(String cascaderName) {
 		log.debug("Request to get Cascader by name : {}", cascaderName);
-        return cascaderRepository.findOneByCascaderName(cascaderName)
+        return cascaderRepository.findTopByCascaderName(cascaderName)
             .map(cascaderMapper::toDto);
+	}
+
+	@Override
+	public Map<String, Cascader> findAllCascaders() {
+		Map<String, Cascader> cascaderMap = new HashMap<>();
+		log.debug("Request to get all Cascader");
+		List<Cascader> cascaderList = cascaderRepository.findAll();
+		
+		for (Cascader cascader : cascaderList) {
+			cascaderMap.put(cascader.getCascaderName(), cascader);
+		}
+		
+		
+		return cascaderMap;
 	}
 }

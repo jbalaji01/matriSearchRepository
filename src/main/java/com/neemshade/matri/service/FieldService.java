@@ -40,4 +40,14 @@ public interface FieldService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    
+    /**
+     * find field record that has max peckOrder
+     * @return
+     */
+    Optional<FieldDTO> findMaxPeckOrder();
+    
+    
+    Optional<FieldDTO> findUniqueFieldUnderMala(String malaName, String fieldName);
 }

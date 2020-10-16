@@ -65,4 +65,11 @@ public class MalaServiceImpl implements MalaService {
         log.debug("Request to delete Mala : {}", id);
         malaRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<MalaDTO> findUniqueMala(String malaName) {
+		log.debug("Request to get unique Mala : {}", malaName);
+        return malaRepository.findTopByMalaName(malaName)
+            .map(malaMapper::toDto);
+	}
 }

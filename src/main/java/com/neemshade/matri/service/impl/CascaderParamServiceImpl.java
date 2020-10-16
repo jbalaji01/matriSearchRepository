@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -78,5 +80,31 @@ public class CascaderParamServiceImpl implements CascaderParamService {
 		log.debug("unique CascaderParam of cascader {},  parent : {}, title : {}", cascaderId, parentId, paramTitle);
 		return cascaderParamRepository.findTopByCascaderIdAndParentIdAndParamTitleIgnoreCase(cascaderId, parentId, paramTitle)
 	            .map(cascaderParamMapper::toDto);
+	}
+
+	@Override
+	public Map<String, CascaderParam> findAllParamsOfCascader(String cascaderName) {
+		log.debug("getting cascaderParams of {}", cascaderName);
+		Map<String, CascaderParam> cascaderParamMap = new HashMap<>();
+		List<CascaderParam> cascaderParamList = cascaderParamRepository.findAllByCascaderCascaderNameOrderByPeckOrder(cascaderName);
+		
+		for (CascaderParam cascaderParam : cascaderParamList) {
+			cascaderParamMap.put(cascaderParam.getParamTitle(), cascaderParam);
+		}
+		
+		return cascaderParamMap;
+	}
+
+	@Override
+	public Map<String, CascaderParamDTO> findAllParamsOfParent(Long parentId) {
+		log.debug("getting cascaderParams of parent {}", parentId);
+		Map<String, CascaderParamDTO> cascaderParamMap = new HashMap<>();
+		List<CascaderParam> cascaderParamList = cascaderParamRepository.findAllByParentIdOrderByPeckOrder(parentId);
+		
+		for (CascaderParam cascaderParam : cascaderParamList) {
+			cascaderParamMap.put(cascaderParam.getParamTitle(), cascaderParamMapper.toDto(cascaderParam));
+		}
+		
+		return cascaderParamMap;
 	}
 }

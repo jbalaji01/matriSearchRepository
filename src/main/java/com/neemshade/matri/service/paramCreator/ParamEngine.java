@@ -35,6 +35,14 @@ public abstract class ParamEngine {
 		
 		String filename = file.getOriginalFilename();
 		
+		
+		if(filename.startsWith("paramNames")) {
+			ParamEngine pe = new FieldParamEngine(file);
+			
+			return pe;
+		}
+		
+		
 		// if it is a csv, it should be having city names
 		if(filename.endsWith(".csv")) {
 			ParamEngine pe = new CityParamEngine(file);

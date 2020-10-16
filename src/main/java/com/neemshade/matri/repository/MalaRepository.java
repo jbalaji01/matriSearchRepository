@@ -2,6 +2,8 @@ package com.neemshade.matri.repository;
 
 import com.neemshade.matri.domain.Mala;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +13,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface MalaRepository extends JpaRepository<Mala, Long> {
+	Optional<Mala> findTopByMalaName(String malaName);
 }

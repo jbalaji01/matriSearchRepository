@@ -40,4 +40,11 @@ public interface MalaParamService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     * get the record that has max peckOrder for a given mala
+     * @param malaId
+     * @return
+     */
+    Optional<MalaParamDTO> findMaxPeckOrderUnderMala(Long malaId);
 }
