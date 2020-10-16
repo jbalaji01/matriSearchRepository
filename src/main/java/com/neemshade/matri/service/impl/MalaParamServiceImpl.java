@@ -65,4 +65,11 @@ public class MalaParamServiceImpl implements MalaParamService {
         log.debug("Request to delete MalaParam : {}", id);
         malaParamRepository.deleteById(id);
     }
+
+	@Override
+	public Optional<MalaParamDTO> findMaxPeckOrderUnderMala(Long malaId) {
+		log.debug("Request to get MalaParam with max peckOrder : {}", malaId);
+        return malaParamRepository.findTopByMalaIdOrderByPeckOrderDesc(malaId)
+            .map(malaParamMapper::toDto);
+	}
 }

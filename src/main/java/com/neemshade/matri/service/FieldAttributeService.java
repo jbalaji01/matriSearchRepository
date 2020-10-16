@@ -40,4 +40,18 @@ public interface FieldAttributeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     * delete all fieldAttributes under field
+     * @param fieldId
+     */
+    void deleteUnderField(Long fieldId);
+    
+    /**
+     * returns unique record of given field and attribute name
+     * @param fieldId
+     * @param attributeName
+     * @return
+     */
+    Optional<FieldAttributeDTO> findUniqueFieldAttribute(Long fieldId, String attributeName);
 }

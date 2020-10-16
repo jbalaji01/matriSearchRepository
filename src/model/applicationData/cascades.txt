@@ -1,6 +1,6 @@
 
 paramSource - userInbuiltParam/profileInbuiltParam/dynamicParam
-dataType - String/Integer/Boolean/Date/DateTimecascader
+dataType - String/Integer/Boolean/Date/DateTime/cascader/Height
 
 createdBy canEnterCustomValue - Self/Parents/Gaurdian/Sibling/Relative/Friend/other
 
@@ -33,3 +33,4 @@ smokingHabit - No/Occasionally/Yes
 
 parentStatus  canEnterCustomValue - Employed/Businessman/Professional/Retired/Not employed/Passed away
 
+height - 

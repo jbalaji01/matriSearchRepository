@@ -1,8 +1,10 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.CascaderParam;
 import com.neemshade.matri.service.dto.CascaderParamDTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -56,4 +58,20 @@ public interface CascaderParamService {
      * @return
      */
     Optional<CascaderParamDTO> findUniqueParamTitle(Long cascaderId, Long parentId, String paramTitle);
+    
+    /**
+     * get the cascaderParam objects of the given cascaderName
+     * the result is placed in a map.  with paramTitle as key and cascaderParam as value
+     * @param cascaderName
+     * @return
+     */
+    Map<String, CascaderParam> findAllParamsOfCascader(String cascaderName);
+    
+    /**
+     * get the children of the given parent
+     * @param parentId
+     * @return
+     */
+    Map<String, CascaderParamDTO> findAllParamsOfParent(Long parentId);
+    
 }
