@@ -18,6 +18,12 @@ import { AUTHORITIES } from 'app/config/constants';
 import Techno from 'app/matriPages/techno';
 import ParamCreator from './matriPages/techno/param-creator';
 
+import BrowseP from 'app/matriPages/browse';
+import Browse from './matriPages/browse/browse';
+
+import RegisterP from 'app/matriPages/register';
+import RegisterProfile from './matriPages/register/register-profile';
+
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
   loading: () => <div>loading ...</div>,
@@ -40,6 +46,12 @@ const Routes = () => (
 
       <PrivateRoute path="/techno" component={Techno} hasAnyAuthorities={[AUTHORITIES.TECHNO]} />
       <PrivateRoute path="/param-creator" component={ParamCreator} hasAnyAuthorities={[AUTHORITIES.TECHNO]} />
+
+      <PrivateRoute path="/browseP" component={BrowseP} hasAnyAuthorities={[AUTHORITIES.USER]} />
+      <PrivateRoute path="/browse" component={Browse} hasAnyAuthorities={[AUTHORITIES.USER]} />
+
+      <PrivateRoute path="/registerP" component={RegisterP} hasAnyAuthorities={[AUTHORITIES.USER]} />
+      <PrivateRoute path="/register-profile" component={RegisterProfile} hasAnyAuthorities={[AUTHORITIES.USER]} />
 
       <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
