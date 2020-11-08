@@ -1,8 +1,10 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.Mala;
 import com.neemshade.matri.service.dto.MalaParamDTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -47,4 +49,13 @@ public interface MalaParamService {
      * @return
      */
     Optional<MalaParamDTO> findMaxPeckOrderUnderMala(Long malaId);
+
+    /**
+     * fetch all malaParam belonging to all mala passed in the malaMap
+     * also collect the field objects of those malaParams
+     * after fetching, place malaParams into right mala
+     * @param malaMap
+     * @throws Exception 
+     */
+	void fillMalaParam(Map<Long, Mala> malaMap) throws Exception;
 }

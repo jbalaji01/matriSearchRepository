@@ -36,6 +36,14 @@ public interface ProfileService {
      * @return the entity.
      */
     Optional<ProfileDTO> findOne(Long id);
+    
+    /**
+     * Get the "id" profile.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<ProfileDTO> findOneByUserId(Long userId);
 
     /**
      * Delete the "id" profile.

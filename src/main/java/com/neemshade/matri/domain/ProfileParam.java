@@ -1,10 +1,17 @@
 package com.neemshade.matri.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * actual data belonging to a person\n\nuserEnteredCustomValue comes into picture when datatype is cascader,\nwhich has canEnterCustomValue=true. In that case, user may enter\na custom value for this param.  That value is stored in userEnteredCustomValue\n
@@ -29,11 +36,13 @@ public class ProfileParam implements Serializable {
     private String userEnteredCustomValue;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profileParams", allowSetters = true)
+//    @JsonIgnoreProperties(value = "profileParams", allowSetters = true)
+    @JsonIgnore
     private Profile profile;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profileParams", allowSetters = true)
+//    @JsonIgnoreProperties(value = "profileParams", allowSetters = true)
+    @JsonIgnore
     private Field field;
 
     @ManyToOne

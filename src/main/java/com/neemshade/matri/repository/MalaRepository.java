@@ -14,4 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MalaRepository extends JpaRepository<Mala, Long> {
 	Optional<Mala> findTopByMalaName(String malaName);
+
+//	@Query("SELECT m FROM Mala m " +
+//			" join MalaParam mp " +
+//			" on m.id = mp.mala.id " +
+//			" WHERE m.id = ?1")
+//	Mala findMalaDetail(Long malaId);
 }
