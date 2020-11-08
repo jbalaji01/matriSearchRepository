@@ -1,5 +1,6 @@
 package com.neemshade.matri.web.rest;
 
+import com.neemshade.matri.domain.Mala;
 import com.neemshade.matri.service.MalaService;
 import com.neemshade.matri.web.rest.errors.BadRequestAlertException;
 import com.neemshade.matri.service.dto.MalaDTO;
@@ -112,5 +113,35 @@ public class MalaResource {
         log.debug("REST request to delete Mala : {}", id);
         malaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+    
+    /**
+     * {@code GET  /malas} : get all the malas required for registration.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of malas in body.
+     * @throws Exception 
+     */
+    @GetMapping("/registration-malas")
+    public List<MalaDTO> getAllRegistrationMalas() throws Exception {
+        log.debug("REST request to get all registration Malas");
+        return malaService.findAllRegistrationMalas();
+    }
+    
+    /**
+     * {@code GET  /malas/:id} : get the "id" mala.
+     *
+     * @param id the id of the malaDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the malaDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/load-mala/{id}")
+    public ResponseEntity<Mala> getMalaDetail(@PathVariable Long id) {
+        log.debug("REST request to get Mala with detail : {}", id);
+        Optional<Mala> mala = Optional.empty();
+		try {
+			mala = malaService.getMalaDetail(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        return ResponseUtil.wrapOrNotFound(mala);
     }
 }

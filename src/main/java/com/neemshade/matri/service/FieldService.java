@@ -1,8 +1,10 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.Field;
 import com.neemshade.matri.service.dto.FieldDTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -50,4 +52,9 @@ public interface FieldService {
     
     
     Optional<FieldDTO> findUniqueFieldUnderMala(String malaName, String fieldName);
+
+    /*
+     * gather attributes and profileParams of field
+     */
+	void fillAttributesAndParams(Map<Long, Field> fieldMap) throws Exception;
 }

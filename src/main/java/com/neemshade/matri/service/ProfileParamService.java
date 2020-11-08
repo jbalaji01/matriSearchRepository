@@ -1,5 +1,6 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.ProfileParam;
 import com.neemshade.matri.service.dto.ProfileParamDTO;
 
 import java.util.List;
@@ -18,6 +19,16 @@ public interface ProfileParamService {
      */
     ProfileParamDTO save(ProfileParamDTO profileParamDTO);
 
+    
+    /**
+     * Save list of profileParam.
+     *
+     * @param profileParamDTO the entity to save.
+     * @return the persisted entity.
+     */
+    List<ProfileParamDTO> saveList(List<ProfileParamDTO> profileParamDTOList);
+
+    
     /**
      * Get all the profileParams.
      *
@@ -40,4 +51,11 @@ public interface ProfileParamService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     * gather all profileParam of given fieldIds
+     * @param fieldIds
+     * @return
+     */
+    List<ProfileParam> findByFieldIds(Long profileId, List<Long> fieldIds);
 }

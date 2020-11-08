@@ -1,7 +1,15 @@
 package com.neemshade.matri.service.impl;
 
+import com.neemshade.matri.service.CommonService;
+import com.neemshade.matri.service.FieldAttributeService;
 import com.neemshade.matri.service.FieldService;
+import com.neemshade.matri.service.ProfileParamService;
 import com.neemshade.matri.domain.Field;
+import com.neemshade.matri.domain.FieldAttribute;
+import com.neemshade.matri.domain.Mala;
+import com.neemshade.matri.domain.MalaParam;
+import com.neemshade.matri.domain.Profile;
+import com.neemshade.matri.domain.ProfileParam;
 import com.neemshade.matri.repository.FieldRepository;
 import com.neemshade.matri.service.dto.FieldDTO;
 import com.neemshade.matri.service.mapper.FieldMapper;
@@ -11,10 +19,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.print.attribute.standard.Fidelity;
 
 /**
  * Service Implementation for managing {@link Field}.
@@ -28,9 +41,18 @@ public class FieldServiceImpl implements FieldService {
     private final FieldRepository fieldRepository;
 
     private final FieldMapper fieldMapper;
+    
+    private final CommonService commonService;
+    
+    private final FieldAttributeService fieldAttributeService;
+    private final ProfileParamService profileParamService;
 
-    public FieldServiceImpl(FieldRepository fieldRepository, FieldMapper fieldMapper) {
-        this.fieldRepository = fieldRepository;
+    public FieldServiceImpl(FieldRepository fieldRepository, FieldMapper fieldMapper,
+    		CommonService commonService, FieldAttributeService fieldAttributeService, ProfileParamService profileParamService) {
+        this.fieldAttributeService = fieldAttributeService;
+		this.profileParamService = profileParamService;
+		this.commonService = commonService;
+		this.fieldRepository = fieldRepository;
         this.fieldMapper = fieldMapper;
     }
 
@@ -78,5 +100,55 @@ public class FieldServiceImpl implements FieldService {
 		log.debug("Request to get unique Field : {}", fieldName);
         return fieldRepository.findTopByMalaParamsMalaMalaNameAndFieldName(malaName, fieldName)
             .map(fieldMapper::toDto);
+	}
+
+	@Override
+	public void fillAttributesAndParams(Map<Long, Field> fieldMap) throws Exception {
+		log.debug("Get all attributes and profileParams of given list of field");
+		
+		Profile focusedProfile = commonService.fetchFocusedProfile();
+		if(focusedProfile == null || focusedProfile.getId() == null)
+			throw new Exception("Login detail missing");
+		
+		List<Long> fieldIds = new ArrayList<>(fieldMap.keySet());
+		List<FieldAttribute> fieldAttributes = fieldAttributeService.findByFieldIds(fieldIds);
+		log.debug("size of fa list={}", fieldAttributes.size());
+		
+		for (FieldAttribute fieldAttribute : fieldAttributes) {
+			
+			log.debug("inside FA loop id {}, field {}", fieldAttribute.getId(), fieldAttribute.getField());
+			
+			if(fieldAttribute == null || fieldAttribute.getField() == null || fieldAttribute.getField().getId() == null)
+				continue;
+			
+			Field field = fieldMap.get(fieldAttribute.getField().getId());
+			if(field == null)
+				continue;
+			
+			log.debug("FA id {} with field id {}", fieldAttribute.getId(), field.getId());
+			
+//			fieldAttribute.setField(null);
+			field.addFieldAttribute(fieldAttribute);
+		}
+		
+		
+		List<ProfileParam> profileParams = profileParamService.findByFieldIds(focusedProfile.getId(), fieldIds);
+		
+		for(ProfileParam profileParam : profileParams) {
+			
+			if(profileParam == null || profileParam.getField() == null || profileParam.getField().getId() == null)
+				continue;
+			
+			Field field = fieldMap.get(profileParam.getField().getId());
+			if(field == null)
+				continue;
+			
+			log.debug("PP id {} with field id {}", profileParam.getId(), field.getId());
+			
+			
+//			profileParam.setField(null);
+//			profileParam.setProfile(null);
+			field.addProfileParam(profileParam);
+		}
 	}
 }

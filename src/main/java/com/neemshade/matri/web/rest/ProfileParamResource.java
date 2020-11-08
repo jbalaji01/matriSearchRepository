@@ -55,6 +55,25 @@ public class ProfileParamResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+    
+    /**
+     * {@code POST  /profile-params-list} : Create a new profileParam.
+     *
+     * @param profileParamDTOList the list of profileParamDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new profileParamDTO list, or with status {@code 400 (Bad Request)} if the profileParam has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/profile-params-list")
+    public ResponseEntity<List<ProfileParamDTO>> createProfileParamList(@RequestBody List<ProfileParamDTO> profileParamDTOList) throws URISyntaxException {
+ 
+//        if (profileParamDTO.getId() != null) {
+//            throw new BadRequestAlertException("A new profileParam cannot already have an ID", ENTITY_NAME, "idexists");
+//        }
+    	List<ProfileParamDTO> resultList = profileParamService.saveList(profileParamDTOList);
+        return ResponseEntity.created(new URI("/api/profile-params"))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, resultList.size() + ""))
+            .body(resultList);
+    }
 
     /**
      * {@code PUT  /profile-params} : Updates an existing profileParam.

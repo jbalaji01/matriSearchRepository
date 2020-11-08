@@ -1,5 +1,6 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.Mala;
 import com.neemshade.matri.service.dto.MalaDTO;
 
 import java.util.List;
@@ -47,4 +48,8 @@ public interface MalaService {
      * @return
      */
     Optional<MalaDTO> findUniqueMala(String malaName);
+
+	List<MalaDTO> findAllRegistrationMalas() throws Exception;
+
+	Optional<Mala> getMalaDetail(Long id) throws Exception;
 }

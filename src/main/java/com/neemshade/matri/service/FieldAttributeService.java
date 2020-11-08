@@ -1,5 +1,6 @@
 package com.neemshade.matri.service;
 
+import com.neemshade.matri.domain.FieldAttribute;
 import com.neemshade.matri.service.dto.FieldAttributeDTO;
 
 import java.util.List;
@@ -54,4 +55,11 @@ public interface FieldAttributeService {
      * @return
      */
     Optional<FieldAttributeDTO> findUniqueFieldAttribute(Long fieldId, String attributeName);
+
+    /**
+     * return all the field attributes of given list of fields
+     * @param fieldIds
+     * @return
+     */
+	List<FieldAttribute> findByFieldIds(List<Long> fieldIds);
 }

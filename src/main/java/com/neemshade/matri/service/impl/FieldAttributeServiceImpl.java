@@ -78,4 +78,9 @@ public class FieldAttributeServiceImpl implements FieldAttributeService {
         return fieldAttributeRepository.findTopByFieldIdAndAttributeName(fieldId, attributeName)
             .map(fieldAttributeMapper::toDto);
 	}
+
+	@Override
+	public List<FieldAttribute> findByFieldIds(List<Long> fieldIds) {
+		return fieldAttributeRepository.findAttributesOfFields(fieldIds);
+	}
 }

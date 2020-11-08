@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,17 @@ public class ProfileParamServiceImpl implements ProfileParamService {
         profileParam = profileParamRepository.save(profileParam);
         return profileParamMapper.toDto(profileParam);
     }
+    
+    @Override
+	public List<ProfileParamDTO> saveList(List<ProfileParamDTO> profileParamDTOList) {
+    	List<ProfileParamDTO> resultList = new ArrayList<>();
+    	
+    	for (ProfileParamDTO profileParamDTO : profileParamDTOList) {
+			resultList.add(save(profileParamDTO));
+		}
+    	
+    	return resultList;
+	}
 
     @Override
     @Transactional(readOnly = true)
@@ -65,4 +77,12 @@ public class ProfileParamServiceImpl implements ProfileParamService {
         log.debug("Request to delete ProfileParam : {}", id);
         profileParamRepository.deleteById(id);
     }
+
+	@Override
+	public List<ProfileParam> findByFieldIds(Long profileId, List<Long> fieldIds) {
+		log.debug("get all profileParam of given field ids");
+		return profileParamRepository.findProfileParamOfFields(profileId, fieldIds);
+	}
+
+	
 }

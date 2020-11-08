@@ -57,10 +57,19 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.findById(id)
             .map(profileMapper::toDto);
     }
+    
+    @Override
+	public Optional<ProfileDTO> findOneByUserId(Long userId) {
+    	log.debug("Request to get Profile based on userId : {}", userId);
+        return profileRepository.findOneByUserId(userId)
+        		.map(profileMapper::toDto);
+	}
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
         profileRepository.deleteById(id);
     }
+
+	
 }
